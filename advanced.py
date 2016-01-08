@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+#切片  list  tuple  str  一样的
+>>> names = ['jim','zhangsan','lisi']
+>>> names[:]
+['jim', 'zhangsan', 'lisi']
+>>> names[1:2]
+['zhangsan']
+>>> names[-2:]
+['zhangsan', 'lisi']
+>>> str = 'abcdefg'
+>>> str[:3:2]   #最后的2表示步长   
+'ac'
+
+#迭代for   list tuple str dict
+>>> d = {'a':1,'b':2,'c':3}   #dict不是顺序存储,迭代的顺序无序
+#key
+>>> for key in d:
+...     print(key)
+... 
+c
+a
+b
+#value
+>>> for value in d.values():
+...     print(value)
+... 
+3
+1
+2
+#k-v
+>>> for k,v in d.items():
+...     print(k,":",v)
+... 
+c : 3
+a : 1
+b : 2
+#str
+>>> str = 'abcedfg'
+>>> for ch in str:
+...     print(ch)
+... 
+a
+b
+c
+e
+d
+f
+g
+#是否可以迭代的判断
+>>> from collections import Iterable
+>>> isinstance('abc',Iterable)
+True
+
+#list 的下标index
+>>> for i,v in enumerate(['a','b','c']):
+...     print(i,v)
+... 
+0 a
+1 b
+2 c
+
+#列表生成式
+>>> [x*x for x in range(1,11) if x%2 ==0] #if过滤   
+[4, 16, 36, 64, 100]
+>>> [x+y for x in 'abc' for y in 'xyz']  #两层循环
+['ax', 'ay', 'az', 'bx', 'by', 'bz', 'cx', 'cy', 'cz']
+
+
+>>> import os
+>>> os.listdir('.')
+['.git', '.gitignore', '.ruby', '__pycache__', 'advanced.py', 'bmi.py', 'demo.py', 'fun.py', 'README.md', 'test.py', 'transient.py']
+#打印dict
+>>> d = {'c': 3, 'a': 1, 'b': 2}
+>>> [k+'='+str(v) for k,v in d.items()]
+['a=1', 'c=3', 'b=2']
+
+#生成器 上面的生成式变成() 
+>>> g = (x*x for x in range(1,11))
+>>> for x in g:
+...     print(x)
+... 
+1
+4
+9
+16
+25
+36
+49
+64
+81
+100
+#第二种方式  函数中 有 yield关键字
+def fib(n):
+	a,b = 1,1
+	while n>0:
+		yield a
+		b,a = a+b,b
+		n = n-1
+	return 'done'
+
+>>> g = fib(6)
+>>> next(g)
+1
+>>> next(g)
+1
+>>> next(g)
+2
+#最后返回 StopIteration
+>>> while True:
+...     try:
+...     
+	
+...             x = next(g)
+...     
+	
+...             print(x)
+...     except StopIteration as e:
+...     
+	
+...             print(e.value)
+...     
+	
+...             break
+... 
+1
+1
+2
+3
+5
+8
+done
+#杨辉三角
+def yanghui(n):
+	l = [1]
+	while n>0:
+		yield l
+		l = [1]+[l[index]+l[index+1] for index  in range(len(l)-1)] +[1]
+		n = n-1
+
+>>> g = yanghui(5)
+>>> for x in g:
+...     print(x)
+... 
+[1]
+[1, 1]
+[1, 2, 1]
+[1, 3, 3, 1]
+[1, 4, 6, 4, 1]
+
+#迭代器
+>>> from collections import Iterator
+>>> isinstance('abc',Iterator)
+False
+>>> isinstance(iter('abc'),Iterator)
+True
