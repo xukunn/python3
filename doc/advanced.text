@@ -70,7 +70,7 @@ True
 
 >>> import os
 >>> os.listdir('.')
-['.git', '.gitignore', '.ruby', '__pycache__', 'advanced.py', 'bmi.py', 'demo.py', 'fun.py', 'README.md', 'base.py', 'test.py']
+['.git', '.gitignore', '.ruby', '__pycache__', 'advanced.py', 'bmi.py', 'demo.py', 'fun.py', 'README.md', 'base.py', 'functional.py']
 #打印dict
 >>> d = {'c': 3, 'a': 1, 'b': 2}
 >>> [k+'='+str(v) for k,v in d.items()]
