@@ -93,6 +93,8 @@ class Teacher(object):
 
 tea = Teacher()
 tea.birth = 1989  # 调用的是set_birth()方法,而不是直接读取属性
+
+
 # tea.age = 20  # 不能设置该属性
 
 
@@ -102,10 +104,14 @@ class Flyable(object):
 		print('flying...')
 
 
-class Bird(Animal,Flyable):
+class Bird(Animal, Flyable):
 	pass
 
 
-b = Bird('bb',23)
+b = Bird('bb', 23)
 b.run()
 b.fly()
+
+import re
+
+re.split(r'[\s\,\;]+', 'a,b;; c  d')  # ['a', 'b', 'c', 'd']  正则表达式的切割
